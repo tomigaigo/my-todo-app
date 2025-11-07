@@ -32,10 +32,14 @@ export default function TodosPage() {
   // ToDo購読
   useEffect(() => {
     if (!userId) return;
+    // const q = query(
+    //   collection(db, "todos"),
+    //   where("uid", "==", userId),
+    //   orderBy("createdAt", "desc")
+    // );
     const q = query(
-      collection(db, "todos"),
-      where("uid", "==", userId),
-      orderBy("createdAt", "desc")
+        collection(db, "todos"),
+        where("uid", "==", userId)
     );
     const unsub = onSnapshot(q, (snap) => {
       setTodos(snap.docs.map((d) => ({ id: d.id, ...(d.data() as any) })));
